@@ -1,3 +1,4 @@
+import type { AxiosError } from "axios";
 import httpClient from "../api/http-client";
 import { AccountService } from "../services/AccountService";
 
@@ -19,7 +20,7 @@ export class UserService {
       );
       return response;
     } catch (e) {
-      let response = e.response!;
+      let response = (e as AxiosError).response!;
       if (response.status == 401 && this.userInfo) {
         const identityService = new AccountService();
         const refreshResponse = await identityService.refreshIdentity();
@@ -52,7 +53,7 @@ export class UserService {
       });
       return response;
     } catch (e) {
-      let response = e.response!;
+      let response = (e as AxiosError).response!;
       if (response.status == 401 && this.userInfo) {
         const identityService = new AccountService();
         const refreshResponse = await identityService.refreshIdentity();
@@ -79,7 +80,7 @@ export class UserService {
       });
       return response;
     } catch (e) {
-      let response = e.response!;
+      let response = (e as AxiosError).response!;
       if (response.status == 401 && this.userInfo) {
         const identityService = new AccountService();
         const refreshResponse = await identityService.refreshIdentity();

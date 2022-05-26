@@ -13,7 +13,7 @@
           <a-row v-bind:style="{ paddingRight: 3 }">
             <div
               :style="{ marginLeft: '30px', marginTop: '10px' }"
-              v-for="item in courses"
+              v-for="item in courses" :key="item.id"
             >
               <Course
                 :key="item?.id"
@@ -30,6 +30,7 @@
                   name: item?.course.name,
                   id: item?.id,
                 }"
+                v-bind:isActiveCourse="true"
               />
             </div>
           </a-row>
@@ -44,6 +45,7 @@
             <div
               v-for="item in universities"
               :style="{ marginLeft: '30px', marginTop: '10px' }"
+              :key="item.id"
             >
               <UniversityCard
                 v-bind:name="item.name"

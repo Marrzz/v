@@ -16,16 +16,17 @@
         >
           <a-divider orientation="left"> Ongoing courses: </a-divider>
           <a-row v-bind:style="{ paddingRight: 3 }">
-            <a-col v-for="item in activeCourses">
+            <a-col v-for="item in activeCourses" :key="item?.id">
               <div :style="{ marginLeft: '30px' }">
                 <Course
-                  :course="{ name: item.course.name, code: item.course.code }"
-                  :language="item.language"
+                  :isActiveCourse="true"
+                  :course="{ name: item?.course.name, code: item?.course.code, id: item?.id }"
+                  :language="item?.language"
                   :professor="{
-                    firstName: item.professor.firstName,
-                    lastName: item.professor.lastName,
+                    firstName: item?.professor.firstName,
+                    lastName: item?.professor.lastName,
                   }"
-                  :university="{ id: university.id, name: university.name }"
+                  :university="{ id: university?.id, name: university?.name }"
                 />
               </div>
             </a-col>
@@ -37,11 +38,13 @@
         >
           <a-divider orientation="left"> All Courses: </a-divider>
           <a-row v-bind:style="{ paddingRight: 3 }">
-            <a-col v-for="item in allCourses">
+            <a-col v-for="item in allCourses"  :key="item?.id">
               <div :style="{ marginLeft: '30px' }">
                 <Course
-                  :course="{ name: item.name, code: item.code }"
+                  :isActiveCourse="false"
+                  :course="{ name: item.name, code: item.code, id: item.id }"
                   :language="item.language"
+                  
                 />
               </div>
             </a-col>
@@ -69,8 +72,8 @@ export default defineComponent({
   },
   data() {
     return {
-      university: {},
-      allCourses: [],
+      university: {} as any,
+      allCourses: [] as any,
       activeCourses: [] as any,
     };
   },

@@ -1,6 +1,6 @@
 <template>
   <a-card v-bind:title="course?.name" style="width: 300px">
-    <template #extra></template>
+    <div v-if="isActiveCourse">
     <p>Language: {{ language }}</p>
     <p>
       Professor:
@@ -15,6 +15,8 @@
     <p>
       <router-link v-bind:to="courseUrl">Go to course...</router-link>
     </p>
+    </div>
+   
   </a-card>
 </template>
 
@@ -33,6 +35,7 @@ export default defineComponent({
     language: String,
     course: Object,
     lectureId: String,
+    isActiveCourse: null
   },
   setup() {},
 });

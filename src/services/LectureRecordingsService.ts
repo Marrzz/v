@@ -1,4 +1,5 @@
 import type { ILecture } from "@/domain/ILecture";
+import type { AxiosError } from "axios";
 import httpClient from "../api/http-client";
 import { AccountService } from "./AccountService";
 
@@ -14,7 +15,7 @@ export class LectureRecordingsService {
       });
       return res.data as ILecture[];
     } catch (e) {
-      let response = e.response!;
+      let response = (e as AxiosError).response!;
       if (response.status == 401 && this.userInfo) {
         const identityService = new AccountService();
         const refreshResponse = await identityService.refreshIdentity();
@@ -32,6 +33,7 @@ export class LectureRecordingsService {
         return res;
       }
     }
+    return null as any
   };
 
   getLectures = async (lectureRecId: string): Promise<ILecture[]> => {
@@ -43,7 +45,7 @@ export class LectureRecordingsService {
       });
       return res.data as ILecture[];
     } catch (e) {
-      let response = e.response!;
+      let response = (e as AxiosError).response!;
       if (response.status == 401 && this.userInfo) {
         const identityService = new AccountService();
         const refreshResponse = await identityService.refreshIdentity();
@@ -64,6 +66,7 @@ export class LectureRecordingsService {
         return res;
       }
     }
+    return null as any
   };
 
   getByCourse = async (courseId: string): Promise<ILecture> => {
@@ -75,7 +78,7 @@ export class LectureRecordingsService {
       });
       return res.data as ILecture;
     } catch (e) {
-      let response = e.response!;
+      let response = (e as AxiosError).response!;
       if (response.status == 401 && this.userInfo) {
         const identityService = new AccountService();
         const refreshResponse = await identityService.refreshIdentity();
@@ -93,6 +96,9 @@ export class LectureRecordingsService {
         return res;
       }
     }
+    return null as any
+    
+
   };
 
   getLectureRecording = async (lectureId: string) => {
@@ -107,7 +113,7 @@ export class LectureRecordingsService {
       );
       return res.data as any;
     } catch (e) {
-      let response = e.response!;
+      let response = (e as AxiosError).response!;
       if (response.status == 401 && this.userInfo) {
         const identityService = new AccountService();
         const refreshResponse = await identityService.refreshIdentity();

@@ -76,6 +76,7 @@ export class AccountService {
 
       return response;
     }
+    return null as any
   }
 
   async getMemberCount() {
